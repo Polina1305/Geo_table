@@ -25,7 +25,7 @@ def create_connection(name, user, password, host, port, database):
     return engine 
 
 
-def query_table(engine):
+def query_table(engine, model_id):
     query = '''SELECT
                       DISTINCT(city.geonameid),
                       city.name,
@@ -39,7 +39,7 @@ def query_table(engine):
     data = pd.read_sql(sql=text(query), con=engine.connect())
     names = data.name.values
     
-    model_id = 'model_labse_ru_geonames'
+    model_id = model_id
     labse = SentenceTransformer(model_id)
     embeddings = labse.encode(names)
     embedding = pd.DataFrame({"embedding_values": [embedding.tolist() for embedding in embeddings]})
