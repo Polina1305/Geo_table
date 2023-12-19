@@ -74,6 +74,3 @@ def result_model(cos_sim, engine):
         'cosine_similarity': cos_sim.values[i][1] 
       }) 
     return result
-
-
-    result = result_model(city)
